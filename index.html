@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Freedom Garden (Ohio) — Quick Start</title>
+  <style>
+    :root{
+      /* Earthy / sage / cute */
+      --bg: #0b1b14;                 /* deep forest */
+      --card: rgba(255,255,255,.10); /* soft glass */
+      --card2: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --line: rgba(255,255,255,.20);
+    
+      --accent: #a7f3d0;             /* mint/sage highlight */
+      --accent2:#9ad0a8;             /* mossy sage (replaces purple) */
+      --warn:#f6d38b;                /* warm honey (gentle warning) */
+    
+      /* Optional extra accents you can use later */
+      --clay:#d6a07a;                /* terracotta accent */
+      --cream:#f3efe6;               /* parchment */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+        background:
+          radial-gradient(1100px 700px at 15% 15%, rgba(154,208,168,.18), transparent 62%),
+          radial-gradient(900px 600px at 85% 25%, rgba(167,243,208,.14), transparent 58%),
+          radial-gradient(900px 650px at 50% 95%, rgba(214,160,122,.10), transparent 60%),
+          /* subtle “paper grain” */
+          repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0px,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 6px
+          ),
+          var(--bg);
+      min-height:100vh;
+    }
+    header{
+      position: sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,27,20,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:16px;}
+    .titleRow{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+/* Let the pills use remaining space and center themselves */
+.pillbar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  flex: 1 1 420px;
+  justify-content:center;
+}
+
+/* Keep the print button from looking “stranded” when it wraps */
+.btnRow{
+  margin-left:auto;
+  flex: 0 0 auto;
+}
+
+    h1{font-size:20px; margin:0; letter-spacing:.2px}
+    .sub{color:var(--muted); font-size:13px; margin-top:4px}
+    .pillbar{display:flex; gap:8px; flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      padding:8px 10px;
+      border-radius:999px;
+      cursor:pointer;
+      user-select:none;
+      font-size:13px;
+      color:var(--text);
+    }
+    .pill.active{
+        border-color: rgba(154,208,168,.75);
+        box-shadow: 0 0 0 2px rgba(154,208,168,.20) inset;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      color:var(--text);
+      padding:9px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .btn.primary{
+        border-color: rgba(154,208,168,.70);
+        background: rgba(154,208,168,.20);
+    }
+
+    main{padding:14px 0 40px;}
+    .grid{display:grid; gap:14px; grid-template-columns: 1fr;}
+    @media (min-width: 900px){
+      /* Left column slightly wider than right */
+      .grid{grid-template-columns: 1fr 1fr;}
+    }
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius:20px;
+      padding:14px;
+    }
+    .card h2{margin:0 0 10px 0; font-size:16px}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    label{font-size:12px; color:var(--muted); display:block; margin-bottom:6px}
+    input, select{
+      width:100%;
+      padding:9px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color:var(--text);
+      outline:none;
+    }
+    .field{flex:1; min-width: 150px;}
+    .hint{font-size:12px; color:var(--muted); margin-top:8px; line-height:1.35}
+    .tiny{font-size:11px; color:var(--muted); line-height:1.35}
+    .divider{height:1px; background:var(--line); margin:12px 0}
+    .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+    .tag{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+    }
+    .plantCard{
+      border:1px solid var(--line);
+      background: var(--card2);
+      border-radius:18px;
+      padding:12px;
+    }
+    .plantTop{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+    .plantName{font-weight:700}
+    .plantMeta{color:var(--muted); font-size:12px; margin-top:3px}
+    .kpi{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .kpi span{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+    }
+    .note{margin-top:8px; color:rgba(255,255,255,.86); font-size:13px; line-height:1.35}
+    .warn{
+      border-color: rgba(253,230,138,.5);
+      background: rgba(253,230,138,.10);
+    }
+    .count{color:var(--muted); font-size:12px; margin-top:6px}
+
+    /* Soft watercolor image that blends into the background */
+    .heroImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    
+      /* "feather" edge + gentle glow */
+      filter: blur(.25px) drop-shadow(0 10px 25px rgba(0,0,0,.25));
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 100%);
+              mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 100%);
+    }
+
+    /* Print: turn the app into a simple packet */
+    @media print{
+      header, .pillbar, .btnRow, .filtersOnly{display:none !important;}
+      body{background:white; color:black;}
+      .card, .plantCard{background:white; border:1px solid #ddd;}
+      .plantMeta, .hint, .tiny, .count{color:#444;}
+      .tag, .kpi span{border:1px solid #ddd; background:#f6f6f6;}
+      a{color:black; text-decoration:none;}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="titleRow">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <img src="garden1.png" alt="Garden illustration left" style="height:32px; width:auto;">
+          <h1>Freedom Garden (Ohio)</h1>
+          <img src="garden2.png" alt="Garden illustration right" style="height:32px; width:auto;">
+        </div>
+      <div class="pillbar" id="nav"></div>
+      <div class="btnRow" style="display:flex; gap:10px; align-items:center;">
+        <button class="btn primary" id="printBtn">Print packet</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="page"></div>
+</main>
+
+<script>
+/**
+ * MVP STRUCTURE (based on your notes):
+ * 1) “Know your place” -> identify growing space (yard/pots/windowsill/indoors).
+ * 2) “Test your spot” -> cheap pH + jar test + light/moisture.
+ * 3) “Pick plants” -> filter by difficulty, location, days-to-harvest, category.
+ * 4) “Rhythm & gratitude” -> short optional practice (non-denominational).
+ * 5) “Community” -> placeholder for trade/sharing later.
+ */
+
+const PAGES = [
+  { key:"start", label:"Welcome" },
+  { key:"place", label:"Know your place" },
+  { key:"test", label:"Test your spot" },
+  { key:"plants", label:"Plant matcher" },
+  { key:"gratitude", label:"Rhythm & thanks" },
+];
+
+// Minimal starter plant library (you can extend this list easily)
+const PLANTS = [
+  {
+    name:"Microgreens (radish/broccoli/pea shoots)",
+    category:"Microgreens & Sprouts",
+    difficulty:1,
+    daysMin:7, daysMax:21,
+    locations:["Windowsill","Indoors low-light","Porch pots"],
+    ph:"6.0–7.5",
+    moisture:"Evenly moist (not soggy)",
+    notes:"Fast success. Use a shallow tray + potting mix. Harvest with scissors when 2–4 inches tall.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Sprouts (mung bean/lentil/alfalfa)",
+    category:"Microgreens & Sprouts",
+    difficulty:1,
+    daysMin:3, daysMax:7,
+    locations:["Kitchen counter"],
+    ph:"N/A",
+    moisture:"Rinse & drain 2x/day",
+    notes:"No soil needed. Use a jar + mesh lid. (Food safety: clean jar, rinse well, refrigerate when done.)",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Basil (pots)",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:30, daysMax:60,
+    locations:["Windowsill","Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moist, good drainage",
+    notes:"Pinch tops to keep it bushy. Bring inside before frost.",
+    propagation:"Seed or cutting",
+    kidFriendly:true,
+  },
+  {
+    name:"Mint (keep it in a pot!)",
+    category:"Herbs",
+    difficulty:1,
+    daysMin:21, daysMax:60,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Tolerant; likes consistent moisture",
+    notes:"Very vigorous. Pot prevents it from taking over your yard. Cuttings root easily in water.",
+    propagation:"Cutting / division",
+    kidFriendly:true,
+  },
+  {
+    name:"Cherry tomatoes (pots or beds)",
+    category:"Vegetables",
+    difficulty:3,
+    daysMin:55, daysMax:80,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Deep watering; mulch helps",
+    notes:"High payoff. Needs sun. Cage or stake. Ohio tip: start indoors or buy a transplant for easiest success.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Potatoes (bucket/grow bag)",
+    category:"Vegetables",
+    difficulty:3,
+    daysMin:70, daysMax:120,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"5.0–6.5",
+    moisture:"Even moisture; don’t waterlog",
+    notes:"Fun with kids. Hill soil up the stems as it grows. Harvest when tops yellow and die back.",
+    propagation:"Seed potato / pieces",
+    kidFriendly:true,
+    safety:"Potato leaves/green parts are not edible. Keep pets/kids from chewing foliage.",
+  },
+  {
+    name:"Pumpkin / winter squash (yard beds)",
+    category:"Vegetables",
+    difficulty:3,
+    daysMin:90, daysMax:120,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.0",
+    moisture:"Steady watering; space to sprawl",
+    notes:"Big vines. Flowers are edible (stuff/quesadilla). Critters may sample fruit—plant extra if possible.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Okra (heat-lover)",
+    category:"Vegetables",
+    difficulty:4,
+    daysMin:55, daysMax:70,
+    locations:["Outdoor beds","Porch pots (large)"],
+    ph:"6.0–7.5",
+    moisture:"Moderate; drought-tolerant once established",
+    notes:"Surprisingly tough and often ignored by some critters. Needs warm weather and sun.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Black raspberries (wild patches / transplants)",
+    category:"Fruit",
+    difficulty:3,
+    daysMin:365, daysMax:730,
+    locations:["Outdoor beds"],
+    ph:"5.5–6.5",
+    moisture:"Moderate; likes mulch",
+    notes:"Perennial. Big payoff once established. Best started from transplants, tip-layering, or rooted canes.",
+    propagation:"Tip-layering / transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Avocado pit (decorative houseplant)",
+    category:"Decorative edible houseplants",
+    difficulty:2,
+    daysMin:30, daysMax:120,
+    locations:["Indoors low-light","Windowsill"],
+    ph:"Potting mix",
+    moisture:"Let top inch dry",
+    notes:"Cute, cheap, surprisingly successful. In Ohio it’s mostly ornamental (don’t expect fruit).",
+    propagation:"Seed (pit)",
+    kidFriendly:true,
+  },
+  {
+    name:"Pineapple top (decorative houseplant)",
+    category:"Decorative edible houseplants",
+    difficulty:3,
+    daysMin:30, daysMax:180,
+    locations:["Windowsill","Indoors low-light"],
+    ph:"Potting mix",
+    moisture:"Light watering; avoid rot",
+    notes:"Twist off crown, remove a few lower leaves, let dry 1–2 days, then plant. Fruit is a long shot indoors—still a great plant.",
+    propagation:"Crown/top",
+    kidFriendly:true,
+  },
+    // -----------------------------
+  // Gift seeds: Herbs
+  // -----------------------------
+  {
+    name:"Basil (Genovese / classic)",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:30, daysMax:60,
+    locations:["Windowsill","Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moist, good drainage",
+    notes:"Classic sweet basil. Pinch tops to keep bushy. Protect from cold nights.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Basil (Thai)",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:30, daysMax:70,
+    locations:["Windowsill","Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moist, good drainage",
+    notes:"More sun = happier. Great flavor; pinch tops early.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Basil (Lemon basil)",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:30, daysMax:70,
+    locations:["Windowsill","Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moist, good drainage",
+    notes:"Citrusy basil. Great for beginners if it gets enough light.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Basil (Purple basil)",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:30, daysMax:70,
+    locations:["Windowsill","Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moist, good drainage",
+    notes:"Pretty + edible. Needs the same sun as other basil.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Basil (Specialty / mixed variety)",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:30, daysMax:70,
+    locations:["Windowsill","Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moist, good drainage",
+    notes:"Use as a catch-all for your 5th basil type (swap name later if you want).",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+
+  {
+    name:"Cilantro (slow-bolt type)",
+    category:"Herbs",
+    difficulty:3,
+    daysMin:30, daysMax:60,
+    locations:["Porch pots","Outdoor beds","Windowsill"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture; don’t let it bake dry",
+    notes:"Cilantro hates heat—best in spring/fall or partial shade. Succession sow every 2–3 weeks for steady harvest.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Cilantro (standard type)",
+    category:"Herbs",
+    difficulty:3,
+    daysMin:30, daysMax:60,
+    locations:["Porch pots","Outdoor beds","Windowsill"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"If it bolts (flowers fast), let it flower for pollinators + coriander seed.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Cilantro (coriander seed type / dual-purpose)",
+    category:"Herbs",
+    difficulty:3,
+    daysMin:30, daysMax:90,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Grow for leaves early; later you can dry seeds as coriander.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+
+  {
+    name:"Lemon balm",
+    category:"Herbs",
+    difficulty:1,
+    daysMin:40, daysMax:80,
+    locations:["Porch pots","Outdoor beds","Windowsill"],
+    ph:"6.0–7.5",
+    moisture:"Moderate; fairly forgiving",
+    notes:"Very forgiving and can spread. Pots keep it polite.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Parsley (flat-leaf Italian)",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:60, daysMax:90,
+    locations:["Windowsill","Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Slow starter—be patient. Likes cooler weather; great spring/fall.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Sage",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:75, daysMax:120,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Let it dry slightly between waterings",
+    notes:"Mediterranean vibe: dislikes soggy soil. Great in pots with drainage.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Thyme",
+    category:"Herbs",
+    difficulty:2,
+    daysMin:75, daysMax:120,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–8.0",
+    moisture:"Dry-to-moderate; hates wet feet",
+    notes:"Likes sun + drainage. Great edge plant in pots.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+
+  // -----------------------------
+  // Gift seeds: Leafy greens
+  // -----------------------------
+  {
+    name:"Kale (curly type)",
+    category:"Leafy Greens",
+    difficulty:2,
+    daysMin:50, daysMax:70,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Cool-season champion. Harvest outer leaves; it keeps producing.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Kale (lacinato / dinosaur type)",
+    category:"Leafy Greens",
+    difficulty:2,
+    daysMin:55, daysMax:80,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Same care as curly kale; slightly longer to size up.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Lettuce (romaine type)",
+    category:"Leafy Greens",
+    difficulty:1,
+    daysMin:35, daysMax:60,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.0",
+    moisture:"Even moisture",
+    notes:"Cool weather. In heat it bolts—spring/fall is easiest in Ohio.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Lettuce (butterhead / leaf type)",
+    category:"Leafy Greens",
+    difficulty:1,
+    daysMin:30, daysMax:55,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.0",
+    moisture:"Even moisture",
+    notes:"Fast + forgiving. Great ‘starter win.’",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Mustard greens",
+    category:"Leafy Greens",
+    difficulty:1,
+    daysMin:30, daysMax:50,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Fast grower. Peppery leaves. Cool weather is best.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Spinach (smooth-leaf type)",
+    category:"Leafy Greens",
+    difficulty:2,
+    daysMin:35, daysMax:55,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.5–7.5",
+    moisture:"Even moisture",
+    notes:"Bolts in heat—spring/fall or partial shade helps.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Spinach (savoy / crinkled type)",
+    category:"Leafy Greens",
+    difficulty:2,
+    daysMin:40, daysMax:60,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.5–7.5",
+    moisture:"Even moisture",
+    notes:"Same spinach rules: cool weather wins.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+
+  // -----------------------------
+  // Gift seeds: Beans / peas / legumes
+  // -----------------------------
+  {
+    name:"Bush green beans",
+    category:"Beans & Peas",
+    difficulty:2,
+    daysMin:50, daysMax:65,
+    locations:["Outdoor beds","Porch pots"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Good beginner crop. Harvest often to keep production going.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Pole green beans",
+    category:"Beans & Peas",
+    difficulty:3,
+    daysMin:55, daysMax:75,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Needs a trellis/pole support. Big yields once it gets going.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Pole yellow wax beans",
+    category:"Beans & Peas",
+    difficulty:3,
+    daysMin:55, daysMax:75,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Same as pole beans, just yellow pods. Needs support.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Snow peas",
+    category:"Beans & Peas",
+    difficulty:3,
+    daysMin:55, daysMax:70,
+    locations:["Outdoor beds","Porch pots"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Cool-season. Plant early spring. Needs trellis (even a small one).",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Garden peas (snap/shelling type)",
+    category:"Beans & Peas",
+    difficulty:3,
+    daysMin:55, daysMax:75,
+    locations:["Outdoor beds","Porch pots"],
+    ph:"6.0–7.5",
+    moisture:"Even moisture",
+    notes:"Cool-season. Plant early. Trellis helps a lot.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Cowpeas / black-eyed peas",
+    category:"Beans & Peas",
+    difficulty:2,
+    daysMin:70, daysMax:100,
+    locations:["Outdoor beds"],
+    ph:"5.8–7.5",
+    moisture:"Moderate; fairly drought-tolerant",
+    notes:"Heat lover (opposite of peas). Great for hot Ohio summer stretches.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+
+  // -----------------------------
+  // Gift seeds: Peppers
+  // -----------------------------
+  {
+    name:"Hot pepper (mild–medium heat type)",
+    category:"Peppers",
+    difficulty:4,
+    daysMin:70, daysMax:100,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Even moisture; mulch helps",
+    notes:"Long season. Easiest if started indoors or bought as a transplant.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Sweet pepper (standard bell type)",
+    category:"Peppers",
+    difficulty:4,
+    daysMin:70, daysMax:100,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Even moisture; mulch helps",
+    notes:"Same pepper rules: warmth + patience. Big pot helps in containers.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Sweet pepper (mini / specialty type)",
+    category:"Peppers",
+    difficulty:4,
+    daysMin:65, daysMax:95,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Even moisture",
+    notes:"Often great in containers. Still likes warmth and time.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+
+  // -----------------------------
+  // Gift seeds: Tomatoes
+  // -----------------------------
+  {
+    name:"Tomato (orange cherry / small slicer type)",
+    category:"Tomatoes",
+    difficulty:4,
+    daysMin:60, daysMax:85,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Deep watering; mulch helps",
+    notes:"Needs sun + support (cage/stake). Easiest with a transplant.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Tomato (red & orange bicolor cherry type)",
+    category:"Tomatoes",
+    difficulty:4,
+    daysMin:60, daysMax:85,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Deep watering; mulch helps",
+    notes:"Same tomato rules: big pot + sun + support.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Tomato (red cherry type)",
+    category:"Tomatoes",
+    difficulty:4,
+    daysMin:55, daysMax:80,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Deep watering; mulch helps",
+    notes:"Classic reliable cherry tomato profile.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Tomato (large red cherry type)",
+    category:"Tomatoes",
+    difficulty:4,
+    daysMin:60, daysMax:85,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–6.8",
+    moisture:"Deep watering; mulch helps",
+    notes:"Often needs a sturdier cage — fruit can get heavy.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+
+  // -----------------------------
+  // Gift seeds: Vegetables (specific types)
+  // -----------------------------
+  {
+    name:"Okra (green type)",
+    category:"Vegetables",
+    difficulty:4,
+    daysMin:55, daysMax:70,
+    locations:["Outdoor beds","Porch pots (large)"],
+    ph:"6.0–7.5",
+    moisture:"Moderate; drought-tolerant once established",
+    notes:"Heat-lover. Harvest pods young for best texture.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Okra (red type)",
+    category:"Vegetables",
+    difficulty:4,
+    daysMin:55, daysMax:75,
+    locations:["Outdoor beds","Porch pots (large)"],
+    ph:"6.0–7.5",
+    moisture:"Moderate",
+    notes:"Red okra is usually green once cooked. Same care as green okra.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Winter squash (butternut type)",
+    category:"Vegetables",
+    difficulty:3,
+    daysMin:90, daysMax:115,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.0",
+    moisture:"Steady watering; space to sprawl",
+    notes:"Big vines + long season. Plant after danger of frost; give it room.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+
+  // -----------------------------
+  // Gift seeds: Flowers & ornamentals
+  // -----------------------------
+  {
+    name:"Marigold (type 1)",
+    category:"Flowers & Ornamentals",
+    difficulty:1,
+    daysMin:45, daysMax:60,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moderate; forgiving",
+    notes:"Easy and cheerful. Great beginner flower and pollinator helper.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Marigold (type 2)",
+    category:"Flowers & Ornamentals",
+    difficulty:1,
+    daysMin:45, daysMax:60,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moderate",
+    notes:"Second marigold slot — rename later to match your exact variety.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Morning glory (blue type)",
+    category:"Flowers & Ornamentals",
+    difficulty:2,
+    daysMin:60, daysMax:90,
+    locations:["Outdoor beds","Porch pots"],
+    ph:"6.0–7.5",
+    moisture:"Moderate",
+    notes:"Climber — give it a fence/trellis. Can reseed easily.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Sunflower (type 1)",
+    category:"Flowers & Ornamentals",
+    difficulty:1,
+    daysMin:70, daysMax:100,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moderate; deeper watering when young",
+    notes:"Needs sun. Stake if it’s a tall variety in windy spots.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Sunflower (type 2)",
+    category:"Flowers & Ornamentals",
+    difficulty:1,
+    daysMin:70, daysMax:110,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moderate",
+    notes:"Second sunflower slot — rename later to match your exact variety.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Sunflower (type 3)",
+    category:"Flowers & Ornamentals",
+    difficulty:1,
+    daysMin:70, daysMax:110,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moderate",
+    notes:"Third sunflower slot — rename later to match your exact variety.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Coneflower (echinacea / purple coneflower)",
+    category:"Flowers & Ornamentals",
+    difficulty:2,
+    daysMin:365, daysMax:730,
+    locations:["Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moderate; drought-tolerant once established",
+    notes:"Perennial. Slow from seed but worth it long-term for pollinators.",
+    propagation:"Seed or transplant",
+    kidFriendly:true,
+  },
+  {
+    name:"Calendula (pot marigold)",
+    category:"Flowers & Ornamentals",
+    difficulty:1,
+    daysMin:45, daysMax:70,
+    locations:["Porch pots","Outdoor beds"],
+    ph:"6.0–7.5",
+    moisture:"Moderate",
+    notes:"Easy cool-season flower. Petals are edible and pretty in salads/tea (verify comfort level).",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+  {
+    name:"Wildflower / pollinator mix",
+    category:"Flowers & Ornamentals",
+    difficulty:2,
+    daysMin:60, daysMax:120,
+    locations:["Outdoor beds"],
+    ph:"Varies",
+    moisture:"Moderate",
+    notes:"Scatter-sow style. Best on loosened soil with good seed-to-soil contact.",
+    propagation:"Seed",
+    kidFriendly:true,
+  },
+
+];
+
+// state
+const state = {
+  pageKey: "start",
+  filters: {
+    search: "",
+    location: "Any",
+    maxDifficulty: 10,
+    maxDays: 9999,
+    category: "Any",
+  },
+    spaceSelected: "windowsill",
+};
+
+function el(tag, attrs={}, children=[]) {
+  const node = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v;
+    else if (k === "html") node.innerHTML = v;
+    else if (k.startsWith("on") && typeof v === "function") node.addEventListener(k.slice(2), v);
+    else node.setAttribute(k, v);
+  }
+  for (const c of children) node.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+  return node;
+}
+
+function setPage(key){
+  state.pageKey = key;
+  renderNav();
+  renderPage();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function renderNav(){
+  const nav = document.getElementById("nav");
+  nav.innerHTML = "";
+  for (const p of PAGES) {
+    const pill = el("div", {
+      class: "pill" + (p.key===state.pageKey ? " active":""),
+      onclick: () => setPage(p.key)
+    }, [p.label]);
+    nav.appendChild(pill);
+  }
+}
+
+function startPage(){
+  return el("div", {class:"grid"}, [
+    el("div", {class:"card"}, [
+      el("h2", {}, ["Welcome"]),
+      el("div", {class:"hint"}, [
+        "A tiny Ohio-first “Freedom Garden” starter: choose your growing space, do quick spot-testing, then use the Plant Matcher to pick stuff that’s likely to succeed."
+      ]),
+      el("div", {class:"divider"}),
+      el("h2", {}, ["How this works"]),
+      el("div", {class:"hint"}, [
+        el("ol", {style:"margin:0; padding-left:18px; line-height:1.45"}, [
+            el("li", {}, ["Know your place (ecology, context, and what the land can hold)."]),
+            el("li", {}, ["Test your spot (light, moisture, quick pH + jar test)."]),
+            el("li", {}, ["Choose resilient plants (filter by difficulty + rhythm)."]),
+            el("li", {}, ["Honor the rhythm (planting, tending, harvesting)."]),
+            el("li", {}, ["Offer thanks and share abundance."]),
+        ])
+      ]),
+      el("div", {class:"divider"}),
+      el("div", {class:"row"}, [
+        el("button", {class:"btn primary", onclick:()=>setPage("place")}, ["Start → Pick your space"]),
+        el("button", {class:"btn", onclick:()=>setPage("plants")}, ["Jump to Plant Matcher"]),
+      ]),
+      el("div", {class:"tiny", style:"margin-top:10px"}, [
+        "Note: This is a gift / brainstorming tool, not professional agricultural advice. Local extension offices are the gold standard for specifics."
+      ])
+    ]),
+    el("div", {class:"card"}, [
+      el("h2", {}, ["Start here — a tiny garden doorway"]),
+      el("div", {class:"hint"}, [
+        "This is the “welcome” corner: a little art + a few good links if someone wants deeper context."
+      ]),
+      el("div", {class:"divider"}),
+    
+      // 🖼️ Hero image (transparent PNG recommended)
+      el("div", {style:"display:flex; justify-content:center;"}, [
+        el("img", {
+          src:"start-bench.png",
+          alt:"A magical garden bench and cottage",
+          style:"max-width:100%; height:auto; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.04);"
+        })
+      ]),
+    
+      el("div", {class:"divider"}),
+    
+      el("h2", {}, ["Additional Resources"]),
+      el("ul", {class:"hint", style:"margin:8px 0 0; padding-left:18px; line-height:1.5"}, [
+        el("li", {}, [
+          el("a", {href:"https://www.freedom-gardens.com/", target:"_blank", rel:"noopener", style:"color:var(--accent);"}, ["Freedom Gardens (official site)"])
+        ]),
+        el("li", {}, [
+          el("a", {href:"https://foodgardening.mequoda.com/freebies/how-to-start-a-freedom-garden/", target:"_blank", rel:"noopener", style:"color:var(--accent);"}, ["How to Start a Freedom Garden (Mequoda)"])
+        ]),
+        el("li", {}, [
+          el("a", {href:"https://buffalofreedomgardens.org/gardening-tips/", target:"_blank", rel:"noopener", style:"color:var(--accent);"}, ["Buffalo Freedom Gardens — Gardening Tips"])
+        ]),
+        el("li", {}, [
+          el("a", {href:"https://www.wesa.fm/identity-justice/2017-09-14/how-plants-were-used-to-gain-freedom-on-the-underground-railroad", target:"_blank", rel:"noopener", style:"color:var(--accent);"}, ["How plants were used to gain freedom on the Underground Railroad (WESA)"])
+        ]),
+        el("li", {}, [
+          el("a", {href:"https://www.freeheirloomseeds.org/", target:"_blank", rel:"noopener", style:"color:var(--accent);"}, ["Free Heirloom Seeds"])
+        ]),
+      ]),
+    
+      el("div", {class:"divider"}),
+    
+      el("div", {class:"hint", style:"margin-top:10px"}, [
+        "Tip: The Print Packet button turns this into a clean paper handout."
+      ]),
+    ])
+  ]);
+}
+
+function placePage(){
+
+    function selectSpace(key){
+      state.spaceSelected = key;
+      renderPage();
+    }
+
+  return el("div", {class:"grid"}, [
+    el("div", {class:"card"}, [
+      el("h2", {}, ["Step 1 — Pick your growing space"]),
+      el("div", {class:"hint"}, [
+        "This page is just to help you choose a path that fits your real life. You can grow something in every category."
+      ]),
+      el("div", {class:"divider"}),
+
+      // WINDOWSILL
+      el("div", {class:"plantCard"}, [
+        el("div", {class:"plantTop"}, [
+          el("div", {}, [
+            el("div", {class:"plantName"}, ["Windowsill"]),
+            el("div", {class:"plantMeta"}, ["Best for: microgreens, herbs, pineapple top, avocado pit"])
+          ]),
+            el("button", {class:"btn", onclick:()=>selectSpace("windowsill")}, [
+              "Show details →"
+            ])
+        ]),
+        el("div", {class:"note"}, ["If you have one sunny-ish window, you’re in business."]),
+      ]),
+
+      // PORCH / POTS
+      el("div", {class:"plantCard", style:"margin-top:12px"}, [
+        el("div", {class:"plantTop"}, [
+          el("div", {}, [
+            el("div", {class:"plantName"}, ["Porch / patio pots"]),
+            el("div", {class:"plantMeta"}, ["Best for: herbs, cherry tomatoes, potatoes (grow bag), okra (big pot)"])
+          ]),
+            el("button", {class:"btn", onclick:()=>selectSpace("porch")}, [
+              "Show details →"
+            ])
+        ]),
+        el("div", {class:"note"}, ["Pots make gardening simpler (and critters slightly less rude)."]),
+      ]),
+
+      // OUTDOOR BEDS
+      el("div", {class:"plantCard", style:"margin-top:12px"}, [
+        el("div", {class:"plantTop"}, [
+          el("div", {}, [
+            el("div", {class:"plantName"}, ["Outdoor beds / yard"]),
+            el("div", {class:"plantMeta"}, ["Best for: squash/pumpkins, raspberries, in-ground herbs, bigger crops"])
+          ]),
+            el("button", {class:"btn", onclick:()=>selectSpace("outdoor")}, [
+              "Show details →"
+            ])
+        ]),
+        el("div", {class:"note"}, ["Great if you’ve got sun + space. Plant extra if you expect wildlife to snack."]),
+      ]),
+
+      // INDOORS LOW-LIGHT
+      el("div", {class:"plantCard", style:"margin-top:12px"}, [
+        el("div", {class:"plantTop"}, [
+          el("div", {}, [
+            el("div", {class:"plantName"}, ["Indoors (low-light friendly)"]),
+            el("div", {class:"plantMeta"}, ["Best for: sprouts, some microgreens, decorative edible houseplants"])
+          ]),
+            el("button", {class:"btn", onclick:()=>selectSpace("indoor")}, [
+              "Show details →"
+            ])
+        ]),
+        el("div", {class:"note"}, ["Sprouts don’t need light; microgreens want some."]),
+      ]),
+    ]),
+
+    // Right side: image + TBD info (changes based on what you clicked)
+    (()=>{
+      const selected = state.spaceSelected || "windowsill";
+    
+      const meta = {
+        windowsill: { title:"Windowsill", img:"windowsill.png" },
+        porch: { title:"Porch / patio pots", img:"porch.png" },
+        outdoor: { title:"Outdoor beds / yard", img:"outdoor-beds.png" },
+        indoor: { title:"Indoors (low-light friendly)", img:"indoors.png" },
+      };
+    
+      const m = meta[selected] || meta.windowsill;
+
+        const details = {
+          windowsill: {
+            panelTitle: "Windowsill: what works well",
+            bullets: [
+              "Light rule: South-facing = easiest. East/West can work. North-facing often needs the “sprouts/microgreens” path.",
+              "Microgreens are the highest success rate: shallow tray + potting mix + scissors.",
+              "Herbs: basil/parsley/cilantro can work, but they want more light than people expect.",
+              "If your window is chilly in winter: move plants back from the glass at night."
+            ],
+            quickWins: ["Sprouts", "Microgreens", "Basil", "Mint (small pot)", "Pineapple top"]
+          },
+        
+          porch: {
+            panelTitle: "Porch/pots: what works well",
+            bullets: [
+              "Container rule: bigger pot = easier life (less drying out).",
+              "Tomatoes are doable, but they want lots of sun + a big container + support (cage/stake).",
+              "Potatoes are fun: use a grow bag/bucket, hill soil up, harvest when tops die back.",
+              "Mint should stay in a pot or it takes over everything."
+            ],
+            quickWins: ["Basil", "Mint", "Cherry tomato (big pot)", "Potatoes (grow bag)", "Okra (large pot)"]
+          },
+        
+          outdoor: {
+            panelTitle: "Outdoor beds/yard: what works well",
+            bullets: [
+              "Sun matters most: tomatoes/okra/squash want ~6+ hours direct sun.",
+              "Squash/pumpkins sprawl—give them space and expect them to be dramatic.",
+              "Perennials (like raspberries) pay off big later, but they’re not instant gratification.",
+              "If critters are common: grow extras, use physical barriers, or choose tougher plants."
+            ],
+            quickWins: ["Pumpkin/Winter squash", "Okra", "Mint (contained)", "Black raspberries (long game)"]
+          },
+        
+          indoor: {
+            panelTitle: "Indoors/low-light: what works well",
+            bullets: [
+              "Sprouts are the easiest: jar + rinse/drain twice daily.",
+              "Microgreens can work with modest light, but they’ll be happier near a window.",
+              "Pineapple/avocado are more ‘joy plants’ than food plants in Ohio—and that’s still valid.",
+              "If you want real leafy growth indoors, a small grow light later is a big upgrade."
+            ],
+            quickWins: ["Sprouts", "Microgreens", "Avocado pit", "Pineapple top"]
+          }
+        };
+        
+        const d = details[selected] || details.windowsill;
+    
+      return el("div", {class:"card"}, [
+        el("h2", {}, [m.title]),
+        el("div", {class:"hint"}, [
+          "Image + info area. (We’ll fill this in tonight — for now it’s a placeholder.)"
+        ]),
+        el("div", {class:"divider"}),
+    
+        // 🖼️ Top image
+        el("img", {
+          src: m.img,
+          alt: m.title + " illustration",
+          class: "heroImg"
+        }),
+    
+        el("div", {class:"divider"}),
+    
+        infoPanel(d.panelTitle, d.bullets, d.quickWins),
+        
+        el("div", {class:"divider"}),
+        el("div", {class:"plantCard"}, [
+          el("div", {class:"plantName"}, ["TBD"]),
+          el("div", {class:"note"}, ["(Tonight: add beginner mistakes + a tiny starter list + what to avoid.)"])
+        ]),
+            
+        el("div", {class:"divider"}),
+        el("button", {class:"btn primary", onclick:()=>setPage("test")}, ["Next → Test your spot"]),
+      ]);
+    })()
+
+  ]);
+}
+
+
+function testPage(){
+  return el("div", {class:"grid"}, [
+    el("div", {class:"card"}, [
+      el("h2", {}, ["Step 2 — Test your spot (cheap + easy)"]),
+      el("div", {class:"hint"}, [
+        "You don’t need to be a master gardener. You just want enough info to avoid obvious mismatches."
+      ]),
+      el("div", {class:"divider"}),
+      el("h2", {}, ["A) Light check"]),
+      el("div", {class:"hint"}, [
+        el("ul", {style:"margin:6px 0 0; padding-left:18px; line-height:1.45"}, [
+          el("li", {}, ["Full sun: ~6+ hours direct sun (tomatoes, okra, squash)."]),
+          el("li", {}, ["Part sun: ~3–6 hours (many herbs)."]),
+          el("li", {}, ["Low light: <3 hours (sprouts; some microgreens; houseplants)."]),
+        ])
+      ]),
+      el("div", {class:"divider"}),
+      el("h2", {}, ["B) Soil texture “jar test” (fast)"]),
+      el("div", {class:"hint"}, [
+        "Fill a clear jar 1/3 with soil, add water + a drop of dish soap, shake hard, let settle 24 hours. Layers roughly show sand (bottom), silt (middle), clay (top)."
+      ]),
+      el("div", {class:"divider"}),
+      el("h2", {}, ["C) Quick pH (if you have strips)"]),
+      el("div", {class:"hint"}, [
+        "Mix a little soil with distilled water to make muddy water. Dip strip in the water portion and read. (Good enough for a starter.)"
+      ]),
+      el("div", {class:"divider"}),
+      el("button", {class:"btn primary", onclick:()=>setPage("plants")}, ["Next → Plant Matcher"]),
+    ]),
+        el("div", {class:"card"}, [
+          el("h2", {}, ["No testing? Still okay."]),
+          el("div", {class:"hint"}, [
+            "If you skip testing, choose “easy wins”: sprouts, microgreens, and pot herbs. That’s the core “instant success” path."
+          ]),
+          el("div", {class:"divider"}),
+        
+          el("img", {
+            src: "easy-wins.png",
+            alt: "Illustration of easy starter garden plants",
+            class: "heroImg"
+          })
+        ])
+  ]);
+}
+
+function unique(list){ return [...new Set(list)].sort(); }
+
+function infoPanel(title, bullets, quickWins){
+  return el("div", {class:"plantCard"}, [
+    el("div", {class:"plantName"}, [title]),
+    el("div", {class:"note"}, [
+      el("ul", {style:"margin:6px 0 0; padding-left:18px; line-height:1.45"}, 
+        bullets.map(b => el("li", {}, [b]))
+      )
+    ]),
+    ...(quickWins && quickWins.length ? [
+      el("div", {class:"hint", style:"margin-top:10px"}, ["Easy starter picks:"]),
+      el("div", {class:"tags"}, quickWins.map(w => el("span", {class:"tag"}, [w])))
+    ] : [])
+  ]);
+}
+
+function plantMatcherPage(){
+  const categories = unique(PLANTS.map(p=>p.category));
+  const locations = unique(PLANTS.flatMap(p=>p.locations));
+
+  const filtersCard = el("div", {class:"card filtersOnly"}, [
+    el("h2", {}, ["Plant Matcher filters"]),
+    el("div", {class:"row"}, [
+      el("div", {class:"field"}, [
+        el("label", {}, ["Search"]),
+        el("input", {value: state.filters.search, placeholder:"e.g., mint, tomato, microgreens", oninput:(e)=>{
+          state.filters.search = e.target.value;
+          renderPage();
+        }})
+      ]),
+      el("div", {class:"field"}, [
+        el("label", {}, ["Location"]),
+        (()=>{
+          const s = el("select", {onchange:(e)=>{
+            state.filters.location = e.target.value;
+            renderPage();
+          }}, []);
+          s.appendChild(el("option", {value:"Any"}, ["Any"]));
+          for (const loc of locations) s.appendChild(el("option", {value:loc}, [loc]));
+          s.value = state.filters.location;
+          return s;
+        })()
+      ]),
+    ]),
+    el("div", {class:"row", style:"margin-top:10px"}, [
+      el("div", {class:"field"}, [
+        el("label", {}, ["Max difficulty (1 easy → 10 hard)"]),
+        el("input", {type:"number", min:"1", max:"10", value:String(state.filters.maxDifficulty), oninput:(e)=>{
+          const v = Math.max(1, Math.min(10, Number(e.target.value || 10)));
+          state.filters.maxDifficulty = v;
+          renderPage();
+        }})
+      ]),
+      el("div", {class:"field"}, [
+        el("label", {}, ["Max days to harvest"]),
+        el("input", {type:"number", min:"1", value:String(state.filters.maxDays), oninput:(e)=>{
+          const v = Math.max(1, Number(e.target.value || 9999));
+          state.filters.maxDays = v;
+          renderPage();
+        }})
+      ]),
+      el("div", {class:"field"}, [
+        el("label", {}, ["Category"]),
+        (()=>{
+          const s = el("select", {onchange:(e)=>{
+            state.filters.category = e.target.value;
+            renderPage();
+          }}, []);
+          s.appendChild(el("option", {value:"Any"}, ["Any"]));
+          for (const c of categories) s.appendChild(el("option", {value:c}, [c]));
+          s.value = state.filters.category;
+          return s;
+        })()
+      ]),
+    ]),
+    el("div", {class:"divider"}),
+    el("button", {class:"btn", onclick:()=>{
+      state.filters = { search:"", location:"Any", maxDifficulty:10, maxDays:9999, category:"Any" };
+      renderPage();
+    }}, ["Reset filters"]),
+    el("div", {class:"hint"}, [
+      "Tip: For “instant success,” set Max difficulty = 2 and Max days = 30."
+    ])
+  ]);
+
+  const filtered = PLANTS
+    .filter(p => p.difficulty <= state.filters.maxDifficulty)
+    .filter(p => (state.filters.location==="Any" ? true : p.locations.includes(state.filters.location)))
+    .filter(p => (p.daysMax <= state.filters.maxDays))
+    .filter(p => (state.filters.category==="Any" ? true : p.category===state.filters.category))
+    .filter(p => {
+      const q = state.filters.search.trim().toLowerCase();
+      if (!q) return true;
+      return (
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.notes.toLowerCase().includes(q)
+      );
+    });
+
+  const list = el("div", {class:"card"}, [
+    el("h2", {}, ["Matches"]),
+    el("div", {class:"count"}, [`Showing ${filtered.length} of ${PLANTS.length}`]),
+    el("div", {class:"divider"}),
+    ...filtered.map(p => el("div", {class:"plantCard", style:"margin-top:10px"}, [
+      el("div", {class:"plantTop"}, [
+        el("div", {}, [
+          el("div", {class:"plantName"}, [p.name]),
+          el("div", {class:"plantMeta"}, [`${p.category} • Difficulty ${p.difficulty}/10 • ${p.daysMin}–${p.daysMax} days`]),
+        ]),
+        el("div", {class:"tags"}, [
+          el("span", {class:"tag"}, [p.propagation]),
+          ...(p.kidFriendly ? [el("span", {class:"tag"}, ["Kid-friendly"])] : []),
+        ])
+      ]),
+      el("div", {class:"kpi"}, [
+        el("span", {}, [`Where: ${p.locations.join(", ")}`]),
+        el("span", {}, [`pH: ${p.ph}`]),
+        el("span", {}, [`Moisture: ${p.moisture}`]),
+      ]),
+      ...(p.safety ? [el("div", {class:"note warn"}, [`Safety note: ${p.safety}`])] : []),
+      el("div", {class:"note"}, [p.notes]),
+    ]))
+  ]);
+
+  return el("div", {class:"grid"}, [filtersCard, list]);
+}
+
+function gratitudePage(){
+  return el("div", {class:"grid"}, [
+    el("div", {class:"card"}, [
+      el("h2", {}, ["Rhythm & thanks (optional)"]),
+      el("div", {class:"hint"}, [
+        "A simple, non-denominational gratitude rhythm you can suggest—people can adapt it to their own faith/tradition."
+      ]),
+      el("div", {class:"divider"}),
+      el("div", {class:"plantCard"}, [
+        el("div", {class:"plantName"}, ["A 30-second practice"]),
+        el("div", {class:"note"}, [
+          "Before planting: pause, name what you’re planting, and say one sentence of thanks (to God, the land, your ancestors, the people of the place you live, or simply “life”)."
+        ]),
+        el("div", {class:"note"}, [
+          "When you harvest: offer a tiny “first bite” thanks—then eat like you earned it."
+        ]),
+      ]),
+      el("div", {class:"divider"}),
+      el("div", {class:"tiny"}, [
+        "If you later want this tied into your moon-region idea, we can add a dropdown that shows a short ‘thanks’ text per region."
+      ])
+    ]),
+    el("div", {class:"card"}, [
+      el("h2", {}, ["Keep it lightweight for Christmas"]),
+      el("div", {class:"hint"}, [
+        "You mentioned wanting this to stay simple as a gift — this page is intentionally short."
+      ])
+    ])
+  ]);
+}
+
+function communityPage(){
+  return el("div", {class:"grid"}, [
+    el("div", {class:"card"}, [
+      el("h2", {}, ["Community (future add-on)"]),
+      el("div", {class:"hint"}, [
+        "If you decide to build trading later, the safest “MVP” is NOT chat—just a simple list people can post to, with strong warnings about privacy."
+      ]),
+      el("div", {class:"divider"}),
+      el("div", {class:"plantCard"}, [
+        el("div", {class:"plantName"}, ["Safer MVP idea"]),
+        el("div", {class:"note"}, [
+          "A form: “I have extra ___” + “I’m looking for ___” + “Preferred meeting place (public)” + optional email."
+        ]),
+        el("div", {class:"note warn"}, [
+          "Safety note: Meet in public, never share home address in-app, and trust your gut."
+        ])
+      ])
+    ]),
+    el("div", {class:"card"}, [
+      el("h2", {}, ["For the Christmas version"]),
+      el("div", {class:"hint"}, [
+        "You can leave this as a ‘coming soon’ page and still have the gift feel complete."
+      ])
+    ])
+  ]);
+}
+
+function renderPage(){
+  const page = document.getElementById("page");
+  page.innerHTML = "";
+
+  let node;
+  switch(state.pageKey){
+    case "start": node = startPage(); break;
+    case "place": node = placePage(); break;
+    case "test": node = testPage(); break;
+    case "plants": node = plantMatcherPage(); break;
+    case "gratitude": node = gratitudePage(); break;
+    default: node = startPage();
+  }
+  page.appendChild(node);
+}
+
+document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+renderNav();
+renderPage();
+</script>
+</body>
+</html>
