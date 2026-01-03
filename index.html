@@ -1335,15 +1335,14 @@ function plantMatcherPage(){
     }}, ["Reset filters"]),
     el("div", {class:"hint"}, [
       "Tip: For “instant success,” set Max difficulty = 2 and Max days = 30."
-    ])
-          // 🖼️ Hero image (transparent PNG recommended)
-      el("div", {style:"display:flex; justify-content:center;"}, [
-        el("img", {
-          src:"FreedomGardenImages/thanks.png",
-          alt:"A magical garden bench and cottage",
-          style:"max-width:100%; height:auto; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.04);"
-        })
-      ]),
+    ]),
+    el("div", {style:"display:flex; justify-content:center;"}, [
+      el("img", {
+        src:"FreedomGardenImages/thanks.png",
+        alt:"Thanks illustration",
+        style:"max-width:100%; height:auto; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.04);"
+      })
+    ]),
   ]);
 
   const filtered = PLANTS
