@@ -195,9 +195,9 @@
   <div class="wrap">
     <div class="titleRow">
         <div style="display:flex; align-items:center; gap:12px;">
-          <img src="garden1.png" alt="Garden illustration left" style="height:32px; width:auto;">
+          <img src="FreedomGardenImages/garden1.png" alt="Garden illustration left" style="height:32px; width:auto;">
           <h1>Freedom Garden (Ohio)</h1>
-          <img src="garden2.png" alt="Garden illustration right" style="height:32px; width:auto;">
+          <img src="FreedomGardenImages/garden2.png" alt="Garden illustration right" style="height:32px; width:auto;">
         </div>
       <div class="pillbar" id="nav"></div>
       <div class="btnRow" style="display:flex; gap:10px; align-items:center;">
@@ -1005,7 +1005,7 @@ function startPage(){
       // 🖼️ Hero image (transparent PNG recommended)
       el("div", {style:"display:flex; justify-content:center;"}, [
         el("img", {
-          src:"start-bench.png",
+          src:"FreedomGardenImages/start-bench.png",
           alt:"A magical garden bench and cottage",
           style:"max-width:100%; height:auto; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.04);"
         })
@@ -1118,10 +1118,10 @@ function placePage(){
       const selected = state.spaceSelected || "windowsill";
     
       const meta = {
-        windowsill: { title:"Windowsill", img:"windowsill.png" },
-        porch: { title:"Porch / patio pots", img:"porch.png" },
-        outdoor: { title:"Outdoor beds / yard", img:"outdoor-beds.png" },
-        indoor: { title:"Indoors (low-light friendly)", img:"indoors.png" },
+        windowsill: { title:"Windowsill", img:"FreedomGardenImages/windowsill.png" },
+        porch: { title:"Porch / patio pots", img:"FreedomGardenImages/porch.png" },
+        outdoor: { title:"Outdoor beds / yard", img:"FreedomGardenImages/outdoor-beds.png" },
+        indoor: { title:"Indoors (low-light friendly)", img:"FreedomGardenImages/indoors.png" },
       };
     
       const m = meta[selected] || meta.windowsill;
